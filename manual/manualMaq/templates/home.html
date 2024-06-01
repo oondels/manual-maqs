@@ -1,13 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
     <title>Django</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <p>Welcome to my first Django project!</p>
-    {{ maqs.Causas }}
+    <header>
+      <nav class="navbar">
+        <a href="#"><img src="../static/logotpm.png" />Home</a>
+        <a href="#">Manutenção</a>
+        <a href="#">Aplicativos</a>
+      </nav>
+    </header>
+    <div class="title"><h1>Manual de Máquinas - Problemas e Soluções</h1></div>
+    <div class="filtros">
+      <div class="setor">
+        Setor
+        <select name="setor-prod" id=""></select>
+      </div>
+      <div class="nome-maquina">
+        Nome da Máquina
+        <select name="nome-maquina" id=""></select>
+      </div>
+    </div>
   </body>
 </html>
