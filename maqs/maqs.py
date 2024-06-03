@@ -8,12 +8,6 @@ with open('maqs.txt', encoding='utf 8') as manual:
     maqs_problem_solution = {}
     solucao_defeito_maquinas = []
     
-    lista_montagem = []
-    lista_costura = []
-    lista_apoio = []
-    lista_serigrafia = []
-    lista_pre = []
-    
     for list_maquina in maqs_defeito:
         maqs_problem_solution[list_maquina[0]] = {}
     
@@ -25,4 +19,5 @@ with open('maqs.txt', encoding='utf 8') as manual:
             maqs_problem_solution[list_maquina[0]][list_maquina[count]] = list_maquina[count+1:]
 
 db = pd.read_csv("./maquinas_setor/maquinas.csv")
-print(db.head())
+lista_de_maquinas = db['Máquinas'].to_list()
+print(db[db['Máquinas']=="Balancim de corte hidráulico (a) ponte"]["Setor"])
