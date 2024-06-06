@@ -13,7 +13,10 @@ with open('maqs.txt', encoding='utf 8') as manual:
         "Costura": {},
         "Serigrafia": {},
         "Pré Solado": {},
-        "Corte Automático": {}
+        "Corte Automático": {},
+        "Lavagem": {},
+        "Dublagem": {},
+        "Bordado": {}
     }
     
     # Função para separar defeitos e Itens a Verificar
@@ -52,6 +55,15 @@ with open('maqs.txt', encoding='utf 8') as manual:
         elif "Corte Automático" in setor_maq:
             maqs_problem_solution["Corte Automático"][list_maquina[0]] = {}
             solucao_defeito("Corte Automático")
+        elif "Lavagem" in setor_maq:
+            maqs_problem_solution["Lavagem"][list_maquina[0]] = {}
+            solucao_defeito("Lavagem")
+        elif "Dublagem" in setor_maq:
+            maqs_problem_solution["Dublagem"][list_maquina[0]] = {}
+            solucao_defeito("Dublagem")
+        elif "Bordado" in setor_maq:
+            maqs_problem_solution["Bordado"][list_maquina[0]] = {}
+            solucao_defeito("Bordado")
 
 # Convertendo para formato Json
 json_file = json.dumps(maqs_problem_solution, ensure_ascii=False)
