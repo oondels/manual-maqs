@@ -36,9 +36,7 @@
             </thead>
             <tbody>
               <tr>
-                <td>Overlock</td>
-                <td>Montagem</td>
-                <td>Operacional</td>
+                <td>{% for x in manual_maquinas_db %} {{x}} {% endfor %}</td>
               </tr>
             </tbody>
           </table>
