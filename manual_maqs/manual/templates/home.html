@@ -1,47 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manual de Máquinas</title>
   </head>
   <body>
-    <div class="container">
-      <div class="wrapper">
-        <header>
-          <nav>
-            <ul>
-              <li>Home</li>
-              <li>Máquinas</li>
-              <li>Defeitos</li>
-            </ul>
-          </nav>
-        </header>
-        <div class="main">
-          <div class="title">
-            <h1>Manual de Máquinas - Defeitos e Causas</h1>
-          </div>
-          <form action="" method="GET">
-            <label for="search_maquina">Pesquisar</label>
-            <input id="search_maquina" type="text" />
-            <input type="submit" />
-          </form>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome da Máquina</th>
-                <th>Setor</th>
-                <th>Categoria do Defeito</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{% for x in manual_maquinas_db %} {{x}} {% endfor %}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <h1>Manual de Máquinas</h1>
+
+    {% for machine, details in manual_maquinas.items %}
+    <h2>{{ machine }}</h2>
+    {% for category, items in details.items %}
+    <h3>{{ category }}</h3>
+    <ul>
+      {% for item in items %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    {% endfor %} {% endfor %}
   </body>
 </html>
