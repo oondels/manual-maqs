@@ -1,15 +1,13 @@
-from django.shortcuts import loader
+from django.shortcuts import loader, render
 from django.http import HttpResponse
 import json
-import pymongo
 
 def home(request):
-    myclient = pymongo.MongoClient("mongodb://localhost:27017")
-    myDb = myclient["local"]
-    manual_maquinas_db = myDb["manual maq"]
+    with open("../maqs_DB/manual_maqs_noSQL.json", "r", encoding="utf-8") as manual_maquinas_db:
+        manual_maquinas = json.load(manual_maquinas_db)    
     
     context = {
-        "manual_maquinas_db": manual_maquinas_db.find(),
+        "manual_maquinas": manual_maquinas,
     }
     template = loader.get_template("home.html")
-    return HttpResponse(template.render(context, request))
+    return render(request, 'home.html', {'manual_maquinas': manual_maquinas})
