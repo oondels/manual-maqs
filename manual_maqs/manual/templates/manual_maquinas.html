@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual de Máquinas</title>
+
+    <style>
+        .expandable-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .expandable-list li {
+            margin: 5px 0;
+        }
+        .nested {
+            display: none;
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .toggle-button {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manual de Máquinas</h1>
+
+    <form method="GET" action="{% url 'manual_maquinas' %}">
+        <input type="text" name="query" placeholder="Pesquise por um setor">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if query %}
+        <p>Resultados para: <strong>{{ query }}</strong></p>
+    {% endif %}
+
+    {% if filtered_manual %}
+        <ul class="expandable-list">
+            <li>
+                {% for setor, machines in filtered_manual.items %}
+                <h2>{{ setor }}</h2>
+                {% for machine, items in machines.items %}
+                    <h3>{{ machine }}</h3>
+                    {% for category, problems in items.items %}
+                        <span class="toggle-button"><h4>{{ category }}</h4></span>
+                        <ul class="nested">
+                            {% for problem in problems %}
+                                <li>{{ problem }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+            </li>
+        </ul>
+        
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggles = document.querySelectorAll('.toggle-button');
+
+            toggles.forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    var nestedList = this.nextElementSibling;
+                    if (nestedList.style.display === 'block') {
+                        nestedList.style.display = 'none';
+                    } else {
+                        nestedList.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
